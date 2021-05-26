@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository contains only Web API.
 
-Things you may want to cover:
+Front-end part can be found at [https://github.com/julianpetriv/react-blog-frontend](https://github.com/julianpetriv/react-blog-frontend)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+docker-compose.yml file is located in this repo, to make it work just copy it to parent dictionary of 2 cloned repos

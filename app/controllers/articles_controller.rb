@@ -4,12 +4,12 @@
 class ArticlesController < ApplicationController
   # GET /articles
   def index
-    render json: Article.all
+    render json: Article.all.select(:id, :title).order('id ASC')
   end
 
   # GET /articles/:id
   def show
-    render json: Article.find(params[:id])
+    render json: Article.find(params[:id]), include: :comments
   end
 
   # POST /articles

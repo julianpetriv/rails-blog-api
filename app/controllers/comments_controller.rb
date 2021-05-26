@@ -2,32 +2,16 @@
 
 # Working with articles
 class CommentsController < ApplicationController
-  # # GET /comments
-  # def index
-  #   render json: Article.all
-  # end
-
-  # # GET /comments/:id
-  # def show
-  #   render json: Article.find(params[:id])
-  # end
-
   # POST /comments
   def create
     article = Article.find(params[:article_id])
-    article.comments.create(comment_params)
-    render json: { message: 'Comment created successfully' }
+    comment = article.comments.new(comment_params)
+    if comment.save
+      render json: comment
+    else
+      render json: { errors: comment.errors.full_messages }, status: 400
+    end
   end
-
-  # # PUT /comments/:id
-  # def update
-  #   article = Article.find(params[:id])
-  #   if article.update(article_params)
-  #     render json: article
-  #   else
-  #     render json: { errors: article.errors.full_messages }, status: 400
-  #   end
-  # end
 
   # DELETE /comments/:id
   def destroy
