@@ -2,6 +2,7 @@
 
 # Working with articles
 class ArticlesController < ApplicationController
+  skip_before_action :authenticate_request, except: [:create, :update, :destroy]
   # GET /articles
   def index
     render json: Article.all.select(:id, :title).order('id ASC')
@@ -36,7 +37,7 @@ class ArticlesController < ApplicationController
   def destroy
     article = Article.find(params[:id])
     article.destroy
-    render json: {message: 'Article destroyed successfully'}
+    render json: { message: 'Article destroyed successfully' }
   end
 
   private
