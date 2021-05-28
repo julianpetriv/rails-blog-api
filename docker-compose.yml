@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  react:
+    build:
+      context: ./react-blog-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - './react-blog-frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:3000
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+      - ./tmp/db:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=rails_blog_api_development
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "psql", "-h", "db", "-U", "postgres", "-c", '\q']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  rails:
+    build:
+      context: ./rails-blog-api
+      dockerfile: Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgresql://postgres@db/rails_blog_api_development?pool=5

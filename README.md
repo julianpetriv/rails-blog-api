@@ -15,5 +15,8 @@ Features of my project:
 * Authentication using phone number and sms one-time-code
 * Image uploading to DigitalOcean Spaces (S3-like storage)
 * Article search (using backend)
+* Docker-compose
 
-<!-- docker-compose.yml file is located in this repo, to make it work just copy it to parent dictionary of 2 cloned repos -->
+P.S.: docker-compose.yml file is located in this repo, to make it work just copy it to parent dictionary of 2 cloned repos
+
+P.P.S.: When running locally, authorization won't work as it requires API key to SMS messaging service (and this is public repo 👀).
