@@ -13,5 +13,7 @@ Features of my project:
 * Deployment on DigitalOcean
 * JSON API + client (React app) + JWT authentication
 * Authentication using phone number and sms one-time-code
+* Image uploading to DigitalOcean Spaces (S3-like storage)
+* Article search (using backend)
 
 <!-- docker-compose.yml file is located in this repo, to make it work just copy it to parent dictionary of 2 cloned repos -->

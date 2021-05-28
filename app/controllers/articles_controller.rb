@@ -13,6 +13,13 @@ class ArticlesController < ApplicationController
     render json: Article.find(params[:id]), include: :comments
   end
 
+  # GET /articles/find/:q
+  def find
+    q = params[:q].downcase
+    render json: Article.where('lower(title) like ?', "%#{q}%").or(Article.where('lower(body) like ?', "%#{q}%"))
+      .select(:id, :title).order('id ASC')
+  end
+
   # POST /articles
   def create
     data = article_params
